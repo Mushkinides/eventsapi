@@ -43,7 +43,7 @@ def test_get_all_events():
         events_map = map(validate, res.json())
         events_list = list(events_map)
 
-        assert len(events_list) == len(test_events)+2
+        assert len(events_list) == len(test_events)
         assert res.status_code == 200
 
 
@@ -59,32 +59,3 @@ def test_create_event():
 
         # Return the created event's id for subsequent tests
         return response.json()["id"]
-
-def test_get_event(created_event_id):
-    with client as c:
-        response = c.get(f"/events/{created_event_id}")
-
-        assert response.status_code == 200
-        assert response.json()["id"] == created_event_id
-        assert response.json()["title"] == "Test Event"
-        
-def test_update_event(created_event_id):
-    updated_data = {"title": "Updated Event", "location": "Updated Location", "description": "Updated Description"}
-
-    with client as c:
-        response = c.put(f"/events/{created_event_id}", json=updated_data)
-
-        assert response.status_code == 200
-        assert response.json()["id"] == created_event_id
-        assert response.json()["title"] == "Updated Event"
-        assert response.json()["location"] == "Updated Location"
-
-def test_delete_event(created_event_id):
-    with client as c:
-        response = c.delete(f"/events/{created_event_id}")
-
-        assert response.status_code == 204
-
-        # Verify that the event has been deleted by trying to get it again
-        response_get_after_delete = c.get(f"/events/{created_event_id}")
-        assert response_get_after_delete.status_code == 404

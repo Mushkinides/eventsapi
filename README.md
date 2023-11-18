@@ -8,8 +8,7 @@ This repository contains the backend codebase for an Event Management API.
 - [Features](#features)
 - [Usage](#usage)
 - [API Documentation](#api-documentation)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Description
 
@@ -46,11 +45,6 @@ pip install fastapi[all]
 uvicorn main:app --reload
 ````
 
-- Then you can use following link to use the API
-````
-http://127.0.0.1:8000/docs 
-````
-
 ## After run this API you need a database in postgres 
 Create a database in postgres then create a file name .env and write the following things in you file 
 ````
@@ -59,4 +53,9 @@ DATABASE_PORT = 5432
 DATABASE_PASSWORD = passward_that_you_set
 DATABASE_NAME = name_of_database
 DATABASE_USERNAME = User_name
-```
+````
+
+# API Documentation
+````
+http://127.0.0.1:8000/docs 
+````
